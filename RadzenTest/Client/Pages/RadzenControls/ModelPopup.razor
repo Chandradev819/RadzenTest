@@ -1,0 +1,43 @@
+﻿@page "/SimplePopup"
+@inject DialogService DialogService
+<RadzenDialog></RadzenDialog>
+<RadzenButton Text="Show dialog with inline Blazor content" Click=@ShowInlineDialog />
+
+@code {
+    async Task ShowInlineDialog()
+    {
+        var result = await DialogService.OpenAsync("Login Popup", ds =>
+    @<div>
+        <div class="row">
+            <fieldset class="border p-2">
+    <legend class="w-auto"> 
+    <div class="col-md-6">
+                <RadzenButton Text="Login as User" Click="() => LoginAsUser()"
+                          Style="margin-bottom: 10px; width: 250px" />
+                <RadzenButton Text="Login as Guest" Click="() => LoginAsGuest()"
+                          Style="margin-bottom: 10px; width: 250px" />
+                <RadzenButton Text="Login as Admin" Click="() => LoginAsAdmin()"
+                          Style="margin-bottom: 10px; width: 250px" />
+            </div>
+                </legend>
+        </fieldset>
+        </div>
+    </div>
+    );
+
+        Console.WriteLine($"Dialog result: {result}");
+    }
+
+    private void LoginAsUser()
+    {
+        
+    }
+     private void LoginAsGuest()
+    {
+        
+    }
+     private void LoginAsAdmin()
+    {
+        
+    }
+}
