@@ -1,7 +1,8 @@
 ﻿@page "/popup"
 @inject DialogService DialogService
-<RadzenDialog></RadzenDialog>
-<RadzenButton ButtonType="ButtonType.Submit" Text="Test Popup" TextTransform="None" Click=@(args => DialogService.Confirm("Confirm Action?", "Test Popup", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" })) />
+
+<RadzenButton ButtonType="ButtonType.Submit" Text="Test Popup" TextTransform="None" 
+Click=@(args => DialogService.Confirm("Confirm Action?", "Test Popup", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" })) />
 @code {
 
 }
