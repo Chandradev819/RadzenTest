@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RadzenTest.Client.Pages.RadzenControls
 {
-    public partial class ModelPopup : ComponentBase
+    public partial class ModelPopup1 : ComponentBase
     {
 
     }

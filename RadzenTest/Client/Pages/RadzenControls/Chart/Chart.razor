@@ -1,0 +1,58 @@
+﻿@page "/chart"
+@using RadzenTest.Shared
+@inject HttpClient Http
+<h3>RadzenGrid</h3>
+
+@*<RadzenDataGrid Data="@forecasts" Count="@count"
+                TItem="WeatherForecast"
+                AllowVirtualization="true"
+                AllowPaging="true"
+                PageSize="10"
+                AllowFiltering="true"
+                FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                LogicalFilterOperator="LogicalFilterOperator.Or"
+                AllowSorting="true">
+    <Columns>
+        <RadzenDataGridColumn TItem="WeatherForecast" Property="Date" Title="Date">
+            <Template Context="forecasts">
+                @forecasts.Date.ToShortDateString()
+            </Template>
+        </RadzenDataGridColumn>
+
+        <RadzenDataGridColumn TItem="WeatherForecast" Property="TemperatureC" Title="TemperatureC" />
+        <RadzenDataGridColumn TItem="WeatherForecast" Property="Summary" Title="Summary" />
+        <RadzenDataGridColumn TItem="WeatherForecast" Property="TemperatureF" Title="TemperatureF" />
+
+    </Columns>
+</RadzenDataGrid>*@
+<RadzenChart>
+    <RadzenLineSeries Smooth="true"
+                      Data="@forecasts"
+                      CategoryProperty="Date"
+                      Title="Temp. C"
+                      LineType="LineType.Solid"
+                      ValueProperty="TemperatureC">
+                      <RadzenMarkers MarkerType="MarkerType.Circle"/>
+    </RadzenLineSeries>
+     <RadzenLineSeries Smooth="true"
+                      Data="@forecasts"
+                      CategoryProperty="Date"
+                      Title="Temp. F"
+                      LineType="LineType.Solid"
+                      ValueProperty="TemperatureF">
+                      <RadzenMarkers MarkerType="MarkerType.Circle"/>
+    </RadzenLineSeries>
+   <RadzenValueAxis>
+        <RadzenGridLines Visible="true"/>
+        <RadzenAxisTitle Text="Temp"/>
+    </RadzenValueAxis>
+</RadzenChart>
+
+
+@code {
+    private WeatherForecast[]? forecasts;
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+}
