@@ -1,0 +1,21 @@
+@page "/autocomplete"
+@using RadzenTest.Shared
+@inject HttpClient Http
+<h3>AutoComplete Demo</h3>
+
+<RadzenAutoComplete 
+Data="@forecasts" 
+TextProperty="Summary" 
+ />
+ 
+
+
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+}
