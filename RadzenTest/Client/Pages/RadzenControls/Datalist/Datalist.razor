@@ -1,0 +1,48 @@
+@page "/datalist"
+@using RadzenTest.Shared
+@inject HttpClient Http
+<h3>RadzenDataList Demo</h3>
+
+<RadzenDataList 
+WrapItems="true" 
+AllowPaging="true" 
+PageSize="2" 
+Data="@forecasts"
+ TItem="WeatherForecast">
+    <Template Context="WeatherForecast">
+        <div class="container mt-3 border border-5">
+<b>Temp Details</b>
+<hr>
+<div class="row">
+<div class="col">Date: </div>
+<div class="col">@WeatherForecast.Date </div>
+</div>
+<hr>
+<div class="row">
+<div class="col">TemperatureC: </div>
+<div class="col">@WeatherForecast.TemperatureC </div>
+</div>
+<hr>
+  <div class="row">
+<div class="col">Summary: </div>
+<div class="col">@WeatherForecast.Summary </div>
+</div>
+<hr>
+  <div class="row">
+<div class="col">TemperatureF: </div>
+<div class="col">@WeatherForecast.TemperatureF </div>
+</div>
+</div>
+    </Template>
+</RadzenDataList>
+
+
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+}
